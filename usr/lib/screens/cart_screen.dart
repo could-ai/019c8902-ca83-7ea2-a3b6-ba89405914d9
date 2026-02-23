@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../data/bakery_data.dart';
+import 'checkout_screen.dart';
 
 class CartScreen extends StatefulWidget {
   const CartScreen({super.key});
@@ -115,9 +116,13 @@ class _CartScreenState extends State<CartScreen> {
                         height: 50,
                         child: ElevatedButton(
                           onPressed: () {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(content: Text('Checkout functionality coming soon!')),
-                            );
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => const CheckoutScreen()),
+                            ).then((_) {
+                              // Refresh state when returning from checkout (in case cart was cleared)
+                              setState(() {});
+                            });
                           },
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.amber[800],

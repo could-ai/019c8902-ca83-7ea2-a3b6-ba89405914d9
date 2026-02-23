@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+import '../data/bakery_data.dart';
 import '../models/product.dart';
 
 class CartService {
@@ -26,6 +28,28 @@ class CartService {
   }
 
   double get total => _items.fold(0, (sum, item) => sum + item.price);
+
+  // Mock order placement
+  Future<bool> placeOrder({
+    required String name,
+    required String address,
+    required String phone,
+    required String paymentMethod,
+  }) async {
+    // Simulate network delay
+    await Future.delayed(const Duration(seconds: 2));
+    
+    // In a real app, here we would send data to Supabase or an API
+    print('Order Placed:');
+    print('Customer: $name, $phone');
+    print('Address: $address');
+    print('Payment: $paymentMethod');
+    print('Items: ${_items.length}, Total: $total');
+
+    // Clear cart after successful order
+    clearCart();
+    return true;
+  }
 }
 
 final List<Product> dummyProducts = [
